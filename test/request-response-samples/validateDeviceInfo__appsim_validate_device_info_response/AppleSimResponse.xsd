@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:resp="http://www.ee.co.uk/common/message/Response/v1.0" 
+	xmlns:respmsg="http://www.ee.co.uk/common/message/ResponseMessage/v1.0" 
+	xmlns:tns="http://www.ee.co.uk/external/apple/service/AppleSim/AppleSimResponse/v1" 
+	targetNamespace="http://www.ee.co.uk/external/apple/service/AppleSim/AppleSimResponse/v1" 
+	elementFormDefault="unqualified" version="1.0">
+	
+	<include schemaLocation="ValidateDeviceInfoResponse.xsd"/>
+	<include schemaLocation="ReserveIccidResponse.xsd"/>
+	<include schemaLocation="BindIccidResponse.xsd"/>
+	<include schemaLocation="UnbindIccidResponse.xsd"/>
+	<include schemaLocation="UnreserveIccidResponse.xsd"/>
+</schema>

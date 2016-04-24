@@ -1,0 +1,31 @@
+{
+    "message": {                                       
+         "notifications": {                            
+              "notification": {                        
+                  "code": "ss",                         
+                  "description": "ss"                   
+              }                                        
+         },                                            
+         "imei": "990000361082411",                    
+         "meid": "99000036108241",                     
+         "csn": "59010002000234f090bf7aca9dba826b",    
+         "serialNumber": "1111",                       
+         "shouldRequireIccid": "false",                
+         "iccidPairing": {                             
+              "iccidPair": [{                          
+                  "iccid": "ts182_Ipad_iccid_old_2",   
+                  "pin": "11",                         
+                  "iccidState": "BOUND",               
+                  "shouldRequireBind": "false"         
+              },                                       
+              {                                        
+                  "iccid": "ts182_Ipad_iccid_old_3",   
+                  "pin": "11",                         
+                  "iccidState": "RESERVED",            
+                  "shouldRequireBind": "false"         
+              }]                                       
+         },                                            
+         "shouldRequireBind": "true"                      
+    }                                         
+
+}

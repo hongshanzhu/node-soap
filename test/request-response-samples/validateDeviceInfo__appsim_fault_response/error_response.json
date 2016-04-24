@@ -1,0 +1,18 @@
+{
+  "Envelope": {
+    "Body": {
+      "Fault": {
+        "faultcode": "100",
+        "faultstring": "fault",
+        "faultactor":"http://www.any.org/ventos/verrantque",
+        "detail": {
+          "businessException":{
+            "code":"ss",
+            "faultDescription":"ss",
+            "sourceSystem":"ss"     
+            }
+        }
+      }
+    }
+  }
+}

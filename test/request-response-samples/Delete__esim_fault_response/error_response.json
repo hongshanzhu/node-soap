@@ -1,0 +1,26 @@
+{
+  "Envelope": {
+    "Body": {
+      "Fault": {
+        "faultcode": "100",
+        "faultstring": "fault",
+        "detail": {
+          "Cai3gFault": {
+            "faultcode": 999,
+            "faultreason": {
+              "reasonText": "reason"
+            },
+            "faultrole": "role",
+            "details": {
+              "PGFault": {
+                "errorcode": 999,
+                "errormessage": "error",
+                "errordetails": "details"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

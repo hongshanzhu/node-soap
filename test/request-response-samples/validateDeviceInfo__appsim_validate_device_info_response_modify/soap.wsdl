@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions 
+	xmlns="http://schemas.xmlsoap.org/wsdl/" 
+	xmlns:soapHeader="http://www.ee.co.uk/common/message/SoapHeader/v1.0" 
+	xmlns:fault="http://www.ee.co.uk/common/message/FaultMessage/v1.0" 
+	xmlns:req="http://www.ee.co.uk/external/apple/service/AppleSim/AppleSimRequest/v1" 
+	xmlns:res="http://www.ee.co.uk/external/apple/service/AppleSim/AppleSimResponse/v1" 
+	xmlns:tns="http://www.ee.co.uk/external/apple/service/AppleSim/v1" 
+	xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" 
+	xmlns:ns="http://messaging.ei.tmobile.net/datatypes" 
+	xmlns:ns1="http://www.ee.co.uk/common/message/Fault/v1.0" 
+	xmlns:ns2="http://www.ee.co.uk/common/message/Notifications/v1.0" 
+	xmlns:ns3="http://www.ee.co.uk/common/message/Request/v1.0" 
+	xmlns:ns4="http://www.ee.co.uk/common/message/Response/v1.0" 
+	xmlns:ns5="http://www.ee.co.uk/common/message/ResponseMessage/v1.0" 
+	xmlns:ns8="http://www.ee.co.uk/common/message/BusinessException/v1.0" 
+	xmlns:ns9="http://www.ee.co.uk/common/message/TechnicalException/v1.0" 
+	xmlns:ns10="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://www.ee.co.uk/external/apple/service/AppleSim/v1">
+	
+	<import namespace="http://www.ee.co.uk/common/message/FaultMessage/v1.0" location="common/message/1.0/FaultMessage.wsdl"/>
+	
+	<types>
+		<schema elementFormDefault="unqualified" targetNamespace="http://www.ee.co.uk/external/apple/service/AppleSim/v1" xmlns="http://www.w3.org/2001/XMLSchema">
+
+			<!-- XSD import for Request/Response -->
+			<import namespace="http://www.ee.co.uk/external/apple/service/AppleSim/AppleSimRequest/v1" schemaLocation="AppleSimRequest.xsd"/>
+			<import namespace="http://www.ee.co.uk/external/apple/service/AppleSim/AppleSimResponse/v1" schemaLocation="AppleSimResponse.xsd"/>
+		</schema>
+	</types>
+	
+	<message name="validateDeviceInfoRequest">
+		<part name="validateDeviceInfoRequest" element="req:validateDeviceInfo"/>
+	</message>
+	<message name="validateDeviceInfoResponse">
+		<part name="validateDeviceInfoResponse" element="res:validateDeviceInfoResponse"/>
+	</message>
+	
+	<message name="reserveIccidRequest">
+		<part name="reserveIccidRequest" element="req:reserveIccid"/>
+	</message>
+	<message name="reserveIccidResponse">
+		<part name="reserveIccidResponse" element="res:reserveIccidResponse"/>
+	</message>	
+
+	<message name="unreserveIccidRequest">
+		<part name="unreserveIccidRequest" element="req:unreserveIccid"/>
+	</message>
+	<message name="unreserveIccidResponse">
+		<part name="unreserveIccidResponse" element="res:unreserveIccidResponse"/>
+	</message>	
+
+	<message name="bindIccidRequest">
+		<part name="bindIccidRequest" element="req:bindIccid"/>
+	</message>
+	<message name="bindIccidResponse">
+		<part name="bindIccidResponse" element="res:bindIccidResponse"/>
+	</message>	
+
+	<message name="unbindIccidRequest">
+		<part name="unbindIccidRequest" element="req:unbindIccid"/>
+	</message>
+	<message name="unbindIccidResponse">
+		<part name="unbindIccidResponse" element="res:unbindIccidResponse"/>
+	</message>	
+	
+	<portType name="AppleSim">
+		<operation name="validateDeviceInfo">
+			<documentation/>
+			<input name="validateDeviceInfoRequest" message="tns:validateDeviceInfoRequest"/>
+			<output name="validateDeviceInfoResponse" message="tns:validateDeviceInfoResponse"/>
+			<fault name="technicalFault" message="fault:technicalFault">
+				<documentation>
+					UNHANDLED_ERROR - Error from Apple that isn't currently handled
+					RESOURCE_UNAVAILABLE - Apple indicated a critical resource is unavailable - request should be retried</documentation>
+			</fault>
+			<fault name="businessFault" message="fault:businessFault">
+				<documentation>
+					INVALID_REQUEST - Apple indicated this request was invalid
+					INCOMPATIBLE_DEVICE - Apple indicated an incompatible device
+					CSN_OPS_NOT_ALLOWED - Apple indicated that all operations on this CSN are not allowed
+					HANDOFF_TOKEN_EXPIRED - Apple indicated that the Handoff Token has expired</documentation>
+			</fault>
+		</operation>
+		<operation name="reserveIccid">
+			<documentation/>
+			<input name="reserveIccidRequest" message="tns:reserveIccidRequest"/>
+			<output name="reserveIccidResponse" message="tns:reserveIccidResponse"/>
+			<fault name="technicalFault" message="fault:technicalFault">
+				<documentation>
+					UNHANDLED_ERROR - Error from Apple that isn't currently handled
+					RESOURCE_UNAVAILABLE - Apple indicated a critical resource is unavailable - request should be retried</documentation>
+			</fault>
+			<fault name="businessFault" message="fault:businessFault">
+				<documentation>
+					INVALID_REQUEST - Apple indicated this request was invalid
+					NO_INVENTORY_AVAILABLE - Apple indicated no inventory available to service the request
+					CSN_OPS_NOT_ALLOWED - Apple indicated that all operations on this CSN are not allowed
+					ICCID_BOUND_TO_CSN - Apple indicated there is already an ICCID bound to this CSN. Must unbind before retrying
+					ICCID_DELIVERED_TO_CSN - Apple indicated there is already an ICCID being delivered to this CSN</documentation>
+			</fault>
+		</operation>
+		<operation name="unreserveIccid">
+			<documentation/>
+			<input name="unreserveIccidRequest" message="tns:unreserveIccidRequest"/>
+			<output name="unreserveIccidResponse" message="tns:unreserveIccidResponse"/>
+			<fault name="technicalFault" message="fault:technicalFault">
+				<documentation>
+					UNHANDLED_ERROR - Error from Apple that isn't currently handled
+					RESOURCE_UNAVAILABLE - Apple indicated a critical resource is unavailable - request should be retried</documentation>
+			</fault>
+			<fault name="businessFault" message="fault:businessFault">
+				<documentation>
+					INVALID_REQUEST - Apple indicated this request was invalid
+					CSN_OPS_NOT_ALLOWED - Apple indicated that all operations on this CSN are not allowed
+					ICCID_PIN_INVALID - Apple indicated the ICCID and pin combination is invalid</documentation>
+			</fault>
+		</operation>		
+		<operation name="bindIccid">
+			<documentation/>
+			<input name="bindIccidRequest" message="tns:bindIccidRequest"/>
+			<output name="bindIccidResponse" message="tns:bindIccidResponse"/>
+			<fault name="technicalFault" message="fault:technicalFault">
+				<documentation>
+					UNHANDLED_ERROR - Error from Apple that isn't currently handled
+					RESOURCE_UNAVAILABLE - Apple indicated a critical resource is unavailable - request should be retried</documentation>
+			</fault>
+			<fault name="businessFault" message="fault:businessFault">
+				<documentation>
+					INVALID_REQUEST - Apple indicated this request was invalid
+					CSN_OPS_NOT_ALLOWED - Apple indicated that all operations on this ICCID are not allowed
+					ICCID_PIN_INVALID - Apple indicated the ICCID and pin combination is invalid
+					ICCID_BOUND_TO_CSN - Apple indicated ICCID is already bound to this CSN. Must unbind before retrying
+					ICCID_MISSING_REPLACE - Apple indicated cannot bind an ICCID without specifying the ICCID to Replace parameter
+					ICCID_NOT_RESERVED - Apple indicated the ICCID hasn't been reserved for this CSN</documentation>
+			</fault>
+		</operation>
+		<operation name="unbindIccid">
+			<documentation/>
+			<input name="unbindIccidRequest" message="tns:unbindIccidRequest"/>
+			<output name="unbindIccidResponse" message="tns:unbindIccidResponse"/>
+			<fault name="technicalFault" message="fault:technicalFault">
+				<documentation>
+					UNHANDLED_ERROR - Error from Apple that isn't currently handled
+					RESOURCE_UNAVAILABLE - Apple indicated a critical resource is unavailable - request should be retried</documentation>
+			</fault>
+			<fault name="businessFault" message="fault:businessFault">
+				<documentation>
+					INVALID_REQUEST - Apple indicated this request was invalid
+					CSN_OPS_NOT_ALLOWED - Apple indicated that all operations on this CSN are not allowed
+				</documentation>
+			</fault>
+		</operation>			
+	</portType>
+	
+	<binding name="AppleSimSoapBinding" type="tns:AppleSim">
+		<wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="validateDeviceInfo">
+			<input>
+				<wsdlsoap:body use="literal"/>
+			</input>
+			<output>
+				<wsdlsoap:body use="literal"/>
+			</output>
+			<fault name="technicalFault">
+				<wsdlsoap:fault name="technicalFault" use="literal"/>
+			</fault>
+			<fault name="businessFault">
+				<wsdlsoap:fault name="businessFault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="reserveIccid">
+			<input>
+				<wsdlsoap:body use="literal"/>
+			</input>
+			<output>
+				<wsdlsoap:body use="literal"/>
+			</output>
+			<fault name="technicalFault">
+				<wsdlsoap:fault name="technicalFault" use="literal"/>
+			</fault>
+			<fault name="businessFault">
+				<wsdlsoap:fault name="businessFault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="unreserveIccid">
+			<input>
+				<wsdlsoap:body use="literal"/>
+			</input>
+			<output>
+				<wsdlsoap:body use="literal"/>
+			</output>
+			<fault name="technicalFault">
+				<wsdlsoap:fault name="technicalFault" use="literal"/>
+			</fault>
+			<fault name="businessFault">
+				<wsdlsoap:fault name="businessFault" use="literal"/>
+			</fault>
+		</operation>
+		<operation name="bindIccid">
+			<input>
+				<wsdlsoap:body use="literal"/>
+			</input>
+			<output>
+				<wsdlsoap:body use="literal"/>
+			</output>
+			<fault name="technicalFault">
+				<wsdlsoap:fault name="technicalFault" use="literal"/>
+			</fault>
+			<fault name="businessFault">
+				<wsdlsoap:fault name="businessFault" use="literal"/>
+			</fault>
+		</operation>	
+		<operation name="unbindIccid">
+			<input>
+				<wsdlsoap:body use="literal"/>
+			</input>
+			<output>
+				<wsdlsoap:body use="literal"/>
+			</output>
+			<fault name="technicalFault">
+				<wsdlsoap:fault name="technicalFault" use="literal"/>
+			</fault>
+			<fault name="businessFault">
+				<wsdlsoap:fault name="businessFault" use="literal"/>
+			</fault>
+		</operation>
+	</binding>
+	
+	<service name="appleSimService">
+		<port name="AppleSim_1.0" binding="tns:AppleSimSoapBinding">
+			<wsdlsoap:address location="http://localhost/external/service/AppleSim-1_0"/>
+		</port>
+	</service>
+</definitions>

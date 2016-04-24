@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" jaxb:version="2.0" targetNamespace="http://schemas.ericsson.com/ma/ESIM/" xmlns="http://schemas.ericsson.com/ma/ESIM/" xmlns:cai3g="http://schemas.ericsson.com/cai3g1.2/" xmlns:esim="http://schemas.ericsson.com/ma/ESIM/" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<xs:include schemaLocation="./dataTypes.xsd"/>
+	<xs:element name="imsi" type="imsiType"/>
+	<xs:element name="msisdn" type="msisdnType"/>
+	<xs:element name="CreateESIMSubscription">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="imsi" type="imsiType"/>
+				<xs:element name="msisdn" type="msisdnType"/>
+				<xs:element name="primaryImsi" type="imsiType"/>
+				<xs:element name="primaryMsisdn" type="msisdnType"/>
+				<xs:element name="primaryVoLTEDomain" type="devRealmType" minOccurs="0"/>
+				<xs:element name="primaryESIMDomain" type="devRealmType"/>
+				<xs:element name="secondaryVoLTEDomain" type="devRealmType" minOccurs="0"/>
+				<xs:element name="secondaryESIMDomain" type="devRealmType"/>
+				<xs:element name="EPSSub" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="epsProfileId" type="epsProfileIdType"/>
+							<xs:element minOccurs="0" name="epsOdb" type="epsOdbType"/>
+							<xs:element name="epsRoamingAllowed" type="xs:boolean" minOccurs="0"/>
+							<xs:element minOccurs="0" name="epsIndividualDefaultContextId" type="xs:unsignedInt"/>
+							<xs:element maxOccurs="unbounded" minOccurs="0" name="epsIndividualContextId" type="xs:integer"/>
+							<xs:element minOccurs="0" name="epsIndividualSubscriedChargingCharacteristic" type="xs:integer"/>
+							<xs:element minOccurs="0" name="epsIndividualAmbrMaximalUplinkIpFlow" type="xs:unsignedInt"/>
+							<xs:element minOccurs="0" name="epsIndividualAmbrMaximalDownlinkIpFlow" type="xs:unsignedInt"/>
+							<xs:element minOccurs="0" name="epsIndividualRatFrequencyPriorityId" type="xs:unsignedInt"/>
+							<xs:element minOccurs="0" name="epsSessionTransferNumber" type="epsSessionTransferNumberType"/>
+							<xs:element minOccurs="0" name="epsCommonMsisdn" type="epsCommonMsisdnType"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="IMSSub" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="userBarringInd" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="roamingAllowed" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="implicitRegSet" type="xs:integer" minOccurs="0"/>
+							<xs:element name="serviceProfileId" type="serviceProfileIdType" minOccurs="0"/>
+							<xs:element name="maxNumberOfContacts" type="maxNumberOfContactsType" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="HLRSub" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="profileId" type="ProfileIdType" minOccurs="0"/>
+							<xs:element name="gprsProfileId" type="GPRSProfileIdType" minOccurs="0"/>
+							<xs:element name="camelProfileId" type="CamelProfileIdType" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="imsi" type="imsiType" use="required">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="imsiAttr"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="msisdn" type="msisdnType" use="required">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="msisdnAttr"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+		<xs:key name="key_create_identity_imsi">
+			<xs:selector xpath="."/>
+			<xs:field xpath="@imsi"/>
+		</xs:key>
+		<xs:keyref name="keyref_create_identity_imsi" refer="key_create_identity_imsi">
+			<xs:selector xpath="./esim:imsi"/>
+			<xs:field xpath="."/>
+		</xs:keyref>
+		<xs:key name="key_create_identity_msisdn">
+			<xs:selector xpath="."/>
+			<xs:field xpath="@msisdn"/>
+		</xs:key>
+		<xs:keyref name="keyref_create_identity_msisdn" refer="key_create_identity_msisdn">
+			<xs:selector xpath="./esim:msisdn"/>
+			<xs:field xpath="."/>
+		</xs:keyref>
+	</xs:element>
+	<xs:element name="SetESIMSubscription">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>bar and unbar operation</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="primaryImsi" type="imsiType"/>
+				<xs:element name="primaryMsisdn" type="msisdnType"/>
+				<xs:element name="primaryVoLTEDomain" type="devRealmType" minOccurs="0"/>
+				<xs:element name="primaryESIMDomain" type="devRealmType"/>
+				<xs:element name="secondaryVoLTEDomain" type="devRealmType" minOccurs="0"/>
+				<xs:element name="secondaryESIMDomain" type="devRealmType"/>
+				<xs:element name="EPSSub">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:annotation>
+								<xs:documentation>barring EPS user</xs:documentation>
+							</xs:annotation>
+							<xs:element name="epsOdb" type="epsOdbType"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="IMSSub">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:annotation>
+								<xs:documentation>barring IMS user</xs:documentation>
+							</xs:annotation>
+							<xs:element name="userBarringInd" type="xs:boolean"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="HLRSub">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:annotation>
+								<xs:documentation>barring all calling and GPRS</xs:documentation>
+							</xs:annotation>
+							<xs:element name="oba" type="BinaryType"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="imsi" type="imsiType" use="required">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="imsiAttr"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="msisdn" type="msisdnType" use="required">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="msisdnAttr"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DeleteESIMSubscription">
+		<xs:complexType>
+			<xs:annotation>
+				<xs:documentation>delete ESIM subscription request</xs:documentation>
+			</xs:annotation>
+			<xs:sequence>
+				<xs:element name="primaryImsi" type="imsiType"/>
+				<xs:element name="primaryMsisdn" type="msisdnType"/>
+				<xs:element name="primaryVoLTEDomain" type="devRealmType" minOccurs="0"/>
+				<xs:element name="primaryESIMDomain" type="devRealmType"/>
+				<xs:element name="secondaryVoLTEDomain" type="devRealmType" minOccurs="0"/>
+				<xs:element name="secondaryESIMDomain" type="devRealmType"/>
+			</xs:sequence>
+			<xs:attribute name="imsi" type="imsiType" use="required">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="imsiAttr"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:attribute>
+			<xs:attribute name="msisdn" type="msisdnType" use="required">
+				<xs:annotation>
+					<xs:appinfo>
+						<jaxb:property name="msisdnAttr"/>
+					</xs:appinfo>
+				</xs:annotation>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

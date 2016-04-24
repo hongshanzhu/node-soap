@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.ee.co.uk/common/message/Fault/v1.0" targetNamespace="http://www.ee.co.uk/common/message/Fault/v1.0" elementFormDefault="qualified" attributeFormDefault="qualified" version="1.0">
+	<complexType name="Fault">
+		<annotation>
+			<documentation>An abstract base type extended by BusinessException and TechnicalException.</documentation>
+		</annotation>
+		<sequence>
+			<element name="code" type="string">
+				<annotation>
+					<documentation>Element contains the error/exception code. E.g. ACCOUNT_NOT_FOUND</documentation>
+				</annotation>
+			</element>
+			<element name="faultDescription" type="string">
+				<annotation>
+					<documentation>Element contains the error/exception description E.g. Account details not found using account number - abc.</documentation>
+				</annotation>
+			</element>
+			<element name="sourceSystem" type="string">
+				<annotation>
+					<documentation>Element contains the system name which generates the error. E.g. CRM, PAYMENTS etc.</documentation>
+				</annotation>
+			</element>
+		</sequence>
+	</complexType>
+</schema>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:req="http://www.ee.co.uk/common/message/Request/v1.0" 
+	xmlns:tns="http://www.ee.co.uk/external/apple/service/AppleSim/AppleSimRequest/v1" 
+	xmlns:data="http://www.ee.co.uk/external/apple/service/AppleSim/DataTypes/v1"
+	targetNamespace="http://www.ee.co.uk/external/apple/service/AppleSim/AppleSimRequest/v1" 
+	elementFormDefault="unqualified" version="1.0">
+	
+	<import namespace="http://www.ee.co.uk/common/message/Request/v1.0" schemaLocation="common/message/1.0/Request.xsd">
+		<annotation>
+			<documentation>EE Common Request schema import</documentation>
+		</annotation>
+	</import>
+
+	<import namespace="http://www.ee.co.uk/external/apple/service/AppleSim/DataTypes/v1" schemaLocation="DataTypes.xsd"/>
+	
+	<element name="unreserveIccid" type="tns:UnreserveIccidRequest">
+		<annotation>
+			<documentation>Request object for Service.</documentation>
+		</annotation>
+	</element>
+	
+	<complexType name="UnreserveIccidRequest">
+		<complexContent>
+			<extension base="req:Request">
+				<sequence>
+					<element name="message">
+						<complexType>
+							<sequence>
+								<element name="iccid" type="string" minOccurs="1" maxOccurs="1"/>
+								<element name="pin" type="string" minOccurs="1" maxOccurs="1"/>
+								<element name="reason" type="data:reason" minOccurs="1" maxOccurs="1"/>
+							</sequence>
+						</complexType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+</schema>

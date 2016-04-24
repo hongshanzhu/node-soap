@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:ns1="http://www.ee.co.uk/common/datatype/DataTypes/v1.0" 
+	xmlns:tns="http://www.ee.co.uk/external/apple/service/AppleSim/DataTypes/v1"
+	targetNamespace="http://www.ee.co.uk/external/apple/service/AppleSim/DataTypes/v1"
+	elementFormDefault="unqualified" version="1.0">
+
+	<simpleType name="UkSimNumberPadded">
+		<annotation>
+			<documentation>This should be a standard UK SIM number padded at the end with a 0.</documentation>
+		</annotation>
+		<restriction base="string">
+			<pattern value="8944\d{15}0"/>
+		</restriction>
+	</simpleType>
+
+	<simpleType name="eventTypeEnum">
+		<annotation>
+			<documentation>A key used to identify the type of event that has occured in the billing system.</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="ApproachingUsageLimit"/>
+			<enumeration value="ReachedUsageLimit"/>
+			<enumeration value="UsageThrottled"/>
+			<enumeration value="EquipmentModified"/>
+			<enumeration value="SubscriberModified"/>
+			<enumeration value="SubscriberDisconnected"/>
+		</restriction>
+	</simpleType>
+
+	<complexType name="eventInfo">
+		<annotation>
+			<documentation>A list of key-value pairs that can be used to augment the event type information.  
+			This might be for debugging purposes or could be agreed upon per event type as necessitated through
+			business requirements.</documentation>
+		</annotation>
+		<attribute name="key" type="string" use="required"/>
+		<attribute name="value" type="string" use="required"/>
+	</complexType>
+
+	<simpleType name="technologyType">
+		<restriction base="string">
+			<enumeration value="GSM_2G"/>
+			<enumeration value="GSM_3G"/>
+			<enumeration value="GSM_4G"/>
+			<enumeration value="CDMA"/>
+			<enumeration value="LTE"/>
+			<enumeration value="Unknown"/>
+		</restriction>
+	</simpleType>
+
+	<complexType name="product">
+		<sequence>
+			<element name="manufacturer" type="string" minOccurs="1" maxOccurs="1"/>
+			<element name="model" type="string" minOccurs="1" maxOccurs="1"/>
+			<element name="carrierPartNumber" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="oemPartNumber" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="technologyTypes" minOccurs="1" maxOccurs="1">
+				<complexType>
+					<sequence>
+						<element name="technologyType" type="tns:technologyType" minOccurs="1" maxOccurs="unbounded"/>
+					</sequence>
+				</complexType>
+			</element>
+		</sequence>
+	</complexType>
+		
+	<complexType name="equipment">
+		<sequence>
+			<element name="imei" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="meid" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="iccid" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="csn" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="serialNumber" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="product" type="tns:product" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	
+	<simpleType name="planType">
+		<restriction base="string">
+			<enumeration value="PrePaid"/>
+			<enumeration value="PostPaid"/>
+			<enumeration value="Sequoia"/>
+		</restriction>
+	</simpleType>
+
+	<simpleType name="iccidState">
+		<annotation>
+			<documentation>
+				RESERVED - Iccid is reserved for a CSN (just after ReserveIccid is invoked)
+				BOUND - Iccid is bound to a CSN (just after BindIccid is invoked)
+				INSTALLED - Iccid has been downloaded and installed on the CSN.
+				FAILED - Iccid has been downloaded but has failed to install on the CSN.
+				TRANSIENT - Iccid is in the process of being personalized and downloaded.
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="RESERVED"/>
+			<enumeration value="BOUND"/>
+			<enumeration value="INSTALLED"/>
+			<enumeration value="TRANSIENT"/>
+			<enumeration value="FAILED"/>
+		</restriction>
+	</simpleType>
+	
+	<simpleType name="reason">
+		<restriction base="string">
+			<enumeration value="AVAILABLE"/>
+			<enumeration value="ACTIVE"/>
+			<enumeration value="UNRECOGNIZED"/>
+			<enumeration value="BLACKLISTED"/>
+			<enumeration value="OTHER"/>
+		</restriction>
+	</simpleType>
+
+	<complexType name="iccidPair">
+		<sequence>
+			<element name="iccid" type="string" minOccurs="1" maxOccurs="1"/>
+			<element name="pin" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="iccidState" type="tns:iccidState" minOccurs="1" maxOccurs="1"/>
+			<element name="shouldRequireBind" type="boolean" minOccurs="1" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	
+	<complexType name="iccidSet">
+		<sequence>
+			<element name="iccidPair" type="tns:iccidPair" minOccurs="1" maxOccurs="unbounded"/>
+		</sequence>
+	</complexType>
+	
+</schema>

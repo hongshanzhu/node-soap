@@ -1,0 +1,60 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://www.ee.co.uk/external/apple/service/AppleSim/AppleSimResponse/v1">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <v1:validateDeviceInfoResponse>
+         <message>
+            <!--Optional:-->
+            <notifications>
+               <!--1 or more repetitions:-->
+               <notification>
+                  <!--anonymous type-->
+                  <code>ss</code>
+                  <!--anonymous type-->
+                  <description>ss</description>
+               </notification>
+            </notifications>
+            <!--Optional:-->
+            <!--type: string-->
+            <imei>990000361082411</imei>
+            <!--Optional:-->
+            <!--type: string-->
+            <meid>99000036108241</meid>
+            <!--type: string-->
+            <csn>59010002000234f090bf7aca9dba826b</csn>
+            <!--Optional:-->
+            <!--type: string-->
+            <serialNumber>1111</serialNumber>
+            <!--type: boolean-->
+            <shouldRequireIccid>false</shouldRequireIccid>
+            <!--You have a CHOICE of the next 2 items at this level-->
+            <iccidPairing>
+               <!--1 or more repetitions:-->
+               <iccidPair>
+                  <!--type: string-->
+                  <iccid>ts182_Ipad_iccid_old_2</iccid>
+                  <!--Optional:-->
+                  <!--type: string-->
+                  <pin>11</pin>
+                  <!--type: iccidState - enumeration: [RESERVED,BOUND,INSTALLED,TRANSIENT,FAILED]-->
+                  <iccidState>BOUND</iccidState>
+                  <!--type: boolean-->
+                  <shouldRequireBind>false</shouldRequireBind>
+               </iccidPair>
+               <iccidPair>
+                  <!--type: string-->
+                  <iccid>ts182_Ipad_iccid_old_3</iccid>
+                  <!--Optional:-->
+                  <!--type: string-->
+                  <pin>11</pin>
+                  <!--type: iccidState - enumeration: [RESERVED,BOUND,INSTALLED,TRANSIENT,FAILED]-->
+                  <iccidState>RESERVED</iccidState>
+                  <!--type: boolean-->
+                  <shouldRequireBind>false</shouldRequireBind>
+               </iccidPair>
+            </iccidPairing>
+            <!--type: boolean-->
+            <shouldRequireBind>true</shouldRequireBind>
+         </message>
+      </v1:validateDeviceInfoResponse>
+   </soapenv:Body>
+</soapenv:Envelope>

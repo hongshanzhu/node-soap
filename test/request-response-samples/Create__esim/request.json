@@ -1,0 +1,21 @@
+{
+  "MOType": "ESIMSubscription@http://schemas.ericsson.com/ma/ESIM/",
+  "MOId": {
+    "imsi": "12345678",
+    "msisdn": "987654321"
+  },
+  "MOAttributes": {
+    "CreateESIMSubscription": {
+      "attributes": {
+        "imsi": "12345678",
+        "msisdn": "987654321"
+      },
+      "imsi": "12345678",
+      "msisdn": "987654321",
+      "primaryImsi": "12345678",
+      "primaryMsisdn": "987654321",
+      "primaryESIMDomain": "primary",
+      "secondaryESIMDomain": "secondary"
+    }
+  }
+}

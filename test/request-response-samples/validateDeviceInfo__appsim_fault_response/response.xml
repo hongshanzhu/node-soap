@@ -1,0 +1,24 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://www.ee.co.uk/common/message/BusinessException/v1.0" xmlns:v11="http://www.ee.co.uk/common/message/Fault/v1.0">
+    <soapenv:Body>
+        <soapenv:Fault>
+            <!--type: QName-->
+            <faultcode>100</faultcode>
+            <faultstring>fault</faultstring>
+            <!--Optional:-->
+            <!--type: anyURI-->
+            <faultactor>http://www.any.org/ventos/verrantque</faultactor>
+            <!--Optional:-->
+            <detail>
+                <v1:businessException>
+                    <!--type: string-->
+                    <v11:code>ss</v11:code>
+                    <!--type: string-->
+                    <v11:faultDescription>ss</v11:faultDescription>
+                    <!--type: string-->
+                    <v11:sourceSystem>ss</v11:sourceSystem>
+                </v1:businessException>
+                <!--You may enter ANY elements at this point-->
+            </detail>
+        </soapenv:Fault>
+    </soapenv:Body>
+</soapenv:Envelope>

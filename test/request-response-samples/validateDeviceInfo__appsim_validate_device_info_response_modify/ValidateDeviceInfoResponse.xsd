@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+	xmlns:resp="http://www.ee.co.uk/common/message/Response/v1.0" 
+	xmlns:respmsg="http://www.ee.co.uk/common/message/ResponseMessage/v1.0" 
+	xmlns:data="http://www.ee.co.uk/external/apple/service/AppleSim/DataTypes/v1" 	
+	xmlns:tns="http://www.ee.co.uk/external/apple/service/AppleSim/AppleSimResponse/v1" 
+	targetNamespace="http://www.ee.co.uk/external/apple/service/AppleSim/AppleSimResponse/v1" 
+	elementFormDefault="unqualified" version="1.0">
+	<import namespace="http://www.ee.co.uk/common/message/Response/v1.0" schemaLocation="common/message/1.0/Response.xsd">
+		<annotation>
+			<documentation> OUK Common Response Schema import</documentation>
+		</annotation>
+	</import>
+	
+	<import namespace="http://www.ee.co.uk/common/message/ResponseMessage/v1.0" schemaLocation="common/message/1.0/ResponseMessage.xsd"/>
+
+	<import namespace="http://www.ee.co.uk/external/apple/service/AppleSim/DataTypes/v1" schemaLocation="DataTypes.xsd"/>
+
+	<element name="validateDeviceInfoResponse" type="tns:ValidateDeviceInfoResponse">
+		<annotation>
+			<documentation>Response object for service.</documentation>
+		</annotation>
+	</element>
+	
+	<complexType name="ValidateDeviceInfoResponse">
+		<complexContent>
+			<extension base="resp:Response">
+				<sequence>
+					<element name="message">
+						<complexType mixed="false">
+							<complexContent mixed="false">
+								<extension base="respmsg:ResponseMessage">
+									<sequence>
+										<element name="imei" type="string" minOccurs="0" maxOccurs="1"/>
+										<element name="meid" type="string" minOccurs="0" maxOccurs="1"/>
+										<element name="csn" type="string" minOccurs="1" maxOccurs="1"/>
+										<element name="serialNumber" type="string" minOccurs="0" maxOccurs="1"/>
+										<element name="shouldRequireIccid" type="boolean" minOccurs="1" maxOccurs="1"/>
+										<choice minOccurs="1" maxOccurs="1">
+											<element name="iccidPairing" type="data:iccidSet"/>
+											<element name="shouldRequireBind" type="boolean"/>
+										</choice>
+									</sequence>								
+								</extension>
+							</complexContent>
+						</complexType>
+					</element>
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+</schema>

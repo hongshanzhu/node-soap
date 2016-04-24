@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://www.ee.co.uk/common/message/Request/v1.0" targetNamespace="http://www.ee.co.uk/common/message/Request/v1.0" version="1.0">
+	<complexType name="Request">
+		<sequence>
+		</sequence>
+	</complexType>
+</schema>
